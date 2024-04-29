@@ -7,10 +7,10 @@ from movies.models import Movie
 def index(request):
     movies = Movie.objects.all()
     context = {'movie_list': movies}
-    return HttpResponse(movies)
+    return render(request, "index.html", context=context)
 
 
 def movie_detail(request, movie_id):
     movie = Movie.objects.get(pk=movie_id)
     context = {'movie': movie}
-    return HttpResponse(str(request))
+    return render(request, "movie_detail.html", context=context)
