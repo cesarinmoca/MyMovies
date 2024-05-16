@@ -1,12 +1,9 @@
 
-{% extends 'base.html' %}
 
-{% block title %}
-    {{ movie.title }}
-{% endblock %}
 
-{% block content %}
+{% block article %}
     <h1>{{ movie.title }}</h1>
+    <img src="/static/movies/assets/img/{{ movie.title |slugify}}.jpg" alt="{{ movie.title }}">
     <p>{{ movie.overview }}</p>
     <p>Fecha de lanzamiento: {{ movie.release_date }}</p>
     <p>Duración: {{ movie.running_time }} minutos</p>
@@ -25,4 +22,4 @@
         {% endfor %}
     </ul>
     <!-- Aquí podrías agregar una sección para mostrar críticas -->
-{% endblock %}
+{% endblock article%}
