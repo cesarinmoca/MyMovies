@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from movies.models import Movie
 from .forms import NameForm
+from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 
@@ -24,15 +25,21 @@ def get_name(request):
         form = NameForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
+            print(form.cleaned_data)
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return HttpResponseRedirect("/thanks/")
-    
+            return render(request, "name_ok.html", {"form": form})
+        else:
+            return render(request, "name_ok.html", {"form": form})
     # if a GET (or any other method) we'll create a blank form
     else:
         form = NameForm()
-    
-    return render(request, "name.html", {"form": form})
 
+    return render(request, "name.html", {"form": form})
     
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
+   
+

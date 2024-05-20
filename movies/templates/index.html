@@ -1,17 +1,21 @@
-
 {% extends "base.html" %}
 
 {% block article %}
-
-<a href="your_name">Pon tu nombre</a>
-
-{% if movie_list %}
-    <ul>
-    {% for movie in movie_list%}
-        <li><a href="/movies/{{ movie.id }}/">{{ movie.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No movies are available.</p>
-{% endif %}
-{% endblock article%}
+<div class="text-center my-4">
+    <a href="your_name/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pon tu nombre</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    {% if movie_list %}
+        {% for movie in movie_list %}
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                <a hx-post="/movies/{{ movie.id }}/" hx-swap="innerHTML" class="block p-4 cursor-pointer">
+                    <h2 class="font-bold text-lg mb-2">{{ movie.title }}</h2>
+                </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="col-span-full text-center">No movies are available.</p>
+    {% endif %}
+</div>
+<div id="movie-detail" class="mt-6"></div>
+{% endblock %}
