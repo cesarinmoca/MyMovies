@@ -15,7 +15,7 @@
             </div>
             <h2 class="text-2xl font-semibold mt-6">Overview</h2>
             <p class="mt-2">{{ movie.overview }}</p>
-            <details class="mt-4">
+            <details class="mt-4 production-details" id="production-details">
                 <summary class="cursor-pointer text-lg font-semibold">Detalles de producción</summary>
                 <div class="mt-2">
                     <p>Presupuesto: {{ movie.budget }}</p>
@@ -23,6 +23,53 @@
                 </div>
             </details>
         </header>
+        <div class="mt-8">
+            <h2 class="text-2xl font-bold">Reseña</h2>
+            <div class="mt-4 flex items-center">
+                <!-- Estrellas para reseña -->
+                <div class="flex">
+                    <!-- Estrella -->
+                    <input type="radio" id="halfStar" name="rating" value="0.5" class="hidden" />
+                    <label for="halfStar" class="flex items-center cursor-pointer">
+                        <svg class="w-6 h-6 fill-current text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                        </svg>
+                    </label>
+                    <!-- Estrella -->
+                    <input type="radio" id="1star" name="rating" value="1" class="hidden" />
+                    <label for="1star" class="flex items-center cursor-pointer">
+                        <svg class="w-6 h-6 fill-current text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                        </svg>
+                    </label>
+                    <!-- Estrella -->
+                    <input type="radio" id="1.5stars" name="rating" value="1.5" class="hidden" />
+                    <label for="1.5stars" class="flex items-center cursor-pointer">
+                        <svg class="w-6 h-6 fill-current text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                        </svg>
+                    </label>
+                    <!-- Estrella -->
+                    <input type="radio" id="2stars" name="rating" value="2" class="hidden" />
+                    <label for="2stars" class="flex items-center cursor-pointer">
+                        <svg class="w-6 h-6 fill-current text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                        </svg>
+                    </label>
+                                        <!-- Estrella  -->
+                    <input type="radio" id="2.5stars" name="rating" value="2.5" class="hidden" />
+                    <label for="2.5stars" class="flex items-center cursor-pointer">
+                        <svg class="w-6 h-6 fill-current text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                        </svg>
+                    </label>
+            </div>
+        </div>
     </div>
 </article>
 <h2 class="text-2xl font-bold mt-8">Top Billed Cast</h2>
@@ -36,3 +83,15 @@
         </div>
     </details>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var productionDetails = document.querySelector('.production-details');
+        var summary = productionDetails.querySelector('summary');
+
+        summary.addEventListener('click', function(event) {
+            event.preventDefault();
+            productionDetails.classList.toggle('open');
+        });
+    });
+</script>
