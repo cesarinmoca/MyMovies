@@ -5,6 +5,7 @@ from .forms import NameForm
 from django.contrib.auth import authenticate, login, logout
 from .forms import MovieReviewForm
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Avg
 
 # Create your views here.
 
@@ -30,8 +31,14 @@ def movie_detail(request, movie_id):
     else:
         form = MovieReviewForm()
 
-    return render(request, 'movie_detail.html', {'movie': movie, 'form': form})
+    # Obtener todas las revisiones de la película
+    reviews = movie.moviereview_set.all()
     
+    # Calcular el promedio de las calificaciones
+    average_rating = reviews.aggregate(Avg('rating'))['rating__avg']
+    
+    context = {'movie': movie, 'form': form, 'average_rating': average_rating}
+    return render(request, 'movie_detail.html', context)
     
 def get_name(request):
     # if this is a POST request we need to process the form data

@@ -25,6 +25,12 @@
                 </div>
                 <h1 class="font-semibold mt-6 text-lg lg:text-xl">Overview</h1>
                 <p class="mt-2 text-base">{{ movie.overview }}</p>
+                <h2 class="font-semibold mt-4 text-lg">Average Rating:</h2>
+                {% if average_rating %}
+                    <p>{{ average_rating }}</p>
+                {% else %}
+                    <p>No ratings yet.</p>
+                {% endif %}
                 <details class="mt-4">
                     <summary class="font-semibold text-lg">Detalles de producción</summary>
                     <p>Presupuesto: {{ movie.budget }}</p>
