@@ -3,6 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from movies.models import Movie
 from .forms import NameForm
 from django.contrib.auth import authenticate, login, logout
+from .forms import MovieReviewForm
+from django.shortcuts import render, get_object_or_404
+
 # Create your views here.
 
 
@@ -13,9 +16,21 @@ def index(request):
 
 
 def movie_detail(request, movie_id):
-    movie = Movie.objects.get(pk=movie_id)
-    context = {'movie': movie}
-    return render(request, "movie_detail.html", context=context)
+    movie = get_object_or_404(Movie, pk=movie_id)
+    
+    if request.method == 'POST':
+        form = MovieReviewForm(request.POST)
+        if form.is_valid():
+            # Guardar el formulario en la base de datos
+            review = form.save(commit=False)
+            review.movie = movie
+            review.user = request.user  # Asignar el usuario actual
+            review.save()
+            return HttpResponseRedirect(request.path)  # Redirigir a la misma página después de guardar
+    else:
+        form = MovieReviewForm()
+
+    return render(request, 'movie_detail.html', {'movie': movie, 'form': form})
     
     
 def get_name(request):
