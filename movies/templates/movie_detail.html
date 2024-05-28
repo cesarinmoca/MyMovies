@@ -46,7 +46,7 @@
             <details>
                 <summary>Cast</summary>
                 {% for credit in movie.moviecredit_set.all %}
-                    <p>{{ credit.person.name }} - {{ credit.job.name }}</p>
+                    <p><a href="{% url 'actor_detail' credit.person.id %}" class="text-blue-500 hover:underline">{{ credit.person.name }}</a> - {{ credit.job.name }}</p>
                 {% endfor %}
             </details>
         </div>

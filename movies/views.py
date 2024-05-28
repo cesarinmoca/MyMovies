@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import MovieReviewForm
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Avg
+import requests
 
 # Create your views here.
 
@@ -59,6 +60,19 @@ def get_name(request):
         form = NameForm()
 
     return render(request, "name.html", {"form": form})
+    
+def actor_detail(request, actor_id):
+    # Llama a la API de TMDB para obtener los detalles del actor
+    api_key = '2b051c085b7a2d13993afe71ae5c5165'
+    url = f'https://api.themoviedb.org/3/person/{actor_id}?api_key={api_key}&language=es'
+    response = requests.get(url)
+    actor = response.json()
+
+    # Puedes agregar más lógica aquí para manejar errores, etc.
+    context = {
+        'actor': actor,
+    }
+    return render(request, 'actor_detail.html', context)
     
 def logout_view(request):
     logout(request)
